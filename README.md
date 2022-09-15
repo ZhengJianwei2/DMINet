@@ -4,7 +4,7 @@
 * Change Detection on Bi-temporal Remote Sensing Images using Dual-branch Multi-level Inter-temporal Network (TGARS Submitted)
 
 ## 1. Environment setup
-This code has been tested on on the workstation with Intel Xeon CPU E5-2690 v4 cores and two GPUs of NVIDIA TITAN V with a single 12G of video memory, Python 3.6, pytorch 1.9, CUDA 10.0, cuDNN 7.6.
+This code has been tested on on the workstation with Intel Xeon CPU E5-2690 v4 cores and GPUs of NVIDIA TITAN V with a single 12G of video memory, Python 3.6, pytorch 1.9, CUDA 10.0, cuDNN 7.6.
 
 ## 2. Download the datesets:
 * LEVIR-CD:
