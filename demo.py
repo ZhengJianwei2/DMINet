@@ -21,7 +21,7 @@ def get_args():
     # args
     # ------------
     parser = ArgumentParser()
-    parser.add_argument('--project_name', default='ICIF_demo_LEVIR+', type=str)
+    parser.add_argument('--project_name', default='DMINet-LEVIR', type=str)
     parser.add_argument('--gpu_ids', type=str, default='0,1', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
     parser.add_argument('--checkpoint_root', default='checkpoints', type=str)
     parser.add_argument('--output_folder', default='samples/predict', type=str)
