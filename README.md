@@ -27,4 +27,8 @@ and put them into checkpoints directory.
 ## 4. Evaluate
 
     python demo.py
+    
+## 5. Test
+
+    python eval_cd.py
 
