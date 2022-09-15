@@ -24,9 +24,9 @@ and put them into data directory.
 
 and put them into checkpoints directory.
 
-## 4. Evaluate
+## 4. Train
 
-    python demo.py
+    python main_cd.py
     
 ## 5. Test
 
