@@ -15,7 +15,7 @@ def main():
     # ------------
     parser = ArgumentParser()
     parser.add_argument('--gpu_ids', type=str, default='0,1', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
-    parser.add_argument('--project_name', default='CTFI-LEVIR', type=str)
+    parser.add_argument('--project_name', default='DMINet-LEVIR', type=str) # DMINet-LEVIR / DMINet-WHU / DMINet-GZ / DMINet-SYSU
     parser.add_argument('--print_models', default=False, type=bool, help='print models')
 
     # data
@@ -30,7 +30,7 @@ def main():
 
     # model
     parser.add_argument('--n_class', default=2, type=int)
-    parser.add_argument('--net_G', default='CTFI-Net', type=str, help='ICIF_Net')
+    parser.add_argument('--net_G', default='DMINet', type=str, help='ICIF_Net')
 
     parser.add_argument('--checkpoint_name', default='best_ckpt.pt', type=str)
 
