@@ -3,6 +3,9 @@ import torch.nn as nn
 from .resnet import resnet18
 import torch.nn.functional as F
 import math
+import matplotlib.pyplot as plt
+import numpy as np
+import cv2
 
 def init_weights(m):
     """
@@ -136,6 +139,26 @@ class CrossAtt(nn.Module):
         feat_sum = self.conv_cat(torch.cat([out1,out2],1))
         return feat_sum, out1, out2
 
+def draw_features(width,height,x,savename):
+    #tic=time.time()
+    fig = plt.figure(figsize=(60,60))
+    fig.subplots_adjust(left=0.05, right=0.95, bottom=0.05, top=0.95, wspace=0.05, hspace=0.05)
+    for i in range(width*height):
+        plt.subplot(height,width, i + 1)
+        plt.axis('off')
+        img = x[0, i, :, :]
+        pmin = np.min(img)
+        pmax = np.max(img)
+        img = ((img - pmin) / (pmax - pmin + 0.000001))*255  #float在[0，1]之间，转换成0-255
+        img=img.astype(np.uint8)  #转成unit8
+        img=cv2.applyColorMap(img, cv2.COLORMAP_JET) #生成heat map
+        img = img[:, :, ::-1]#注意cv2（BGR）和matplotlib(RGB)通道是相反的
+        plt.imshow(img)
+    fig.savefig(savename, dpi=100)
+    fig.clf()
+    plt.close()
+    #print("time:{}".format(time.time()-tic))
+    
 class DMINet(nn.Module):
     def __init__(self, num_classes=2, drop_rate=0.2, normal_init=True, pretrained=False, show_Feature_Maps=False):
         super(DMINet, self).__init__()
@@ -218,6 +241,17 @@ class DMINet(nn.Module):
 
         out_1_2 = self.final_2(self.upsamplex8(out3))
         out_2_2 = self.final2_2(self.upsamplex8(out3_2))
+        
+        if self.show_Feature_Maps:
+            savepath=r'temp'
+            draw_features(8,8,(F.interpolate(c1, scale_factor=4, mode='bilinear')).cpu().detach().numpy(),"{}/c1_img1.png".format(savepath))
+            draw_features(8,16,(F.interpolate(c2, scale_factor=8, mode='bilinear')).cpu().detach().numpy(),"{}/c2_img1.png".format(savepath))
+            draw_features(16,16,(F.interpolate(c3, scale_factor=8, mode='bilinear')).cpu().detach().numpy(),"{}/c3_img1.png".format(savepath))  
+            draw_features(8,8,(F.interpolate(c1_img2, scale_factor=4, mode='bilinear')).cpu().detach().numpy(),"{}/c1_img2.png".format(savepath))
+            draw_features(8,16,(F.interpolate(c2_img2, scale_factor=8, mode='bilinear')).cpu().detach().numpy(),"{}/c2_img2.png".format(savepath))
+            draw_features(16,16,(F.interpolate(c3_img2, scale_factor=8, mode='bilinear')).cpu().detach().numpy(),"{}/c3_img2.png".format(savepath))
+            # You can show more.
+            
         return out_1, out_2, out_1_2, out_2_2 
 
     def init_weights(self):
