@@ -139,7 +139,7 @@ class CrossAtt(nn.Module):
         feat_sum = self.conv_cat(torch.cat([out1,out2],1))
         return feat_sum, out1, out2
 
-def draw_features(width,height,x,savename):
+def draw_features(width=8,height=8,x,savename):
     #tic=time.time()
     fig = plt.figure(figsize=(60,60))
     fig.subplots_adjust(left=0.05, right=0.95, bottom=0.05, top=0.95, wspace=0.05, hspace=0.05)
