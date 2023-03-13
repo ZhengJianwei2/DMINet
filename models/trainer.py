@@ -243,15 +243,14 @@ class CDTrainer():
         self.batch = batch
         img_in1 = batch['A'].to(self.device)
         img_in2 = batch['B'].to(self.device)
-        self.G_pred1, self.G_pred2, self.G_pred3 = self.net_G(img_in1, img_in2) 
-        self.G_pred = self.G_pred1 + self.G_pred2 + self.G_pred3 
-
+        self.G_pred1, self.G_pred2, self.G_middle1, self.G_middle2 = self.net_G(img_in1, img_in2) 
+        self.G_pred = self.G_pred1 + self.G_pred2
 
     def _backward_G(self):
         gt = self.batch['L'].to(self.device).long()
 
         # torch.argmax(G_pred, dim=1)
-        self.G_loss =  self._pxl_loss(self.G_pred1, gt) + self._pxl_loss(self.G_pred2, gt) + 0.5*self._pxl_loss(self.G_pred3, gt) 
+        self.G_loss =  self._pxl_loss(self.G_pred1, gt) + self._pxl_loss(self.G_pred2, gt) + 0.5*(self._pxl_loss(self.self.G_middle1, gt)+self._pxl_loss(self.self.G_middle2, gt))
 
         self.G_loss.backward()
 
