@@ -250,7 +250,7 @@ class CDTrainer():
         gt = self.batch['L'].to(self.device).long()
 
         # torch.argmax(G_pred, dim=1)
-        self.G_loss =  self._pxl_loss(self.G_pred1, gt) + self._pxl_loss(self.G_pred2, gt) + 0.5*(self._pxl_loss(self.self.G_middle1, gt)+self._pxl_loss(self.self.G_middle2, gt))
+        self.G_loss =  self._pxl_loss(self.G_pred1, gt) + self._pxl_loss(self.G_pred2, gt) + 0.5*(self._pxl_loss(self.G_middle1, gt)+self._pxl_loss(self.G_middle2, gt))
 
         self.G_loss.backward()
 
