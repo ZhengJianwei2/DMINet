@@ -52,10 +52,10 @@ if __name__ == '__main__':
     # optimizer
     parser.add_argument('--optimizer', default='sgd', type=str)
     parser.add_argument('--lr', default=1e-2, type=float)
-    parser.add_argument('--max_epochs', default=100, type=int)
+    parser.add_argument('--max_epochs', default=200, type=int)
     parser.add_argument('--lr_policy', default='linear', type=str,
                         help='linear | step')
-    parser.add_argument('--lr_decay_iters', default=100, type=int)
+    parser.add_argument('--lr_decay_iters', default=200, type=int)
     parser.add_argument('--beta1', type=float, default=0.5, help='beta1 of adam optimizer')
     parser.add_argument('--beta2', type=float, default=0.999, help='beta2 of adam optimizer')
 
