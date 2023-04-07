@@ -37,7 +37,7 @@ def get_args():
 
     # model
     parser.add_argument('--n_class', default=2, type=int)
-    parser.add_argument('--net_G', default='CTFI-Net', type=str, help='ICIF-Net')
+    parser.add_argument('--net_G', default='DMINet', type=str, help='ICIF-Net')
     parser.add_argument('--checkpoint_name', default='best_ckpt.pt', type=str)
 
     args = parser.parse_args()
